@@ -1,7 +1,7 @@
 {
-  "name": "Make State Great Again Slides",
-  "short_name": "Make State Great Again Slides",
-  "description": "Make State Great Again Slides",
+  "name": "CSS You Might Not Know Slides",
+  "short_name": "CSS You Might Not Know Slides",
+  "description": "CSS You Might Not Know Slides",
   "start_url": "/",
   "scope": "./",
   "display": "standalone",

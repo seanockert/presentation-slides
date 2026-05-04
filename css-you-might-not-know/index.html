@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="icon.png" />
+    <title>CSS You Might Not Know</title>
+    <style>
+      * {
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        color-scheme: light dark;
+        --color-lightest: hsl(0 0 100%);
+        --color-bg: hsl(0 0 96%);
+        --color-bg-alt: hsl(0 0 92%);
+        --color-primary: hsl(0 0 5%);
+        --color-primary-alt: hsl(0 0 5% / 0.2);
+        --color-red: hsl(2, 94%, 49%);
+        --color-red-alt: hsl(2, 94%, 33%);
+        --color-blue: hsl(210 100% 40%);
+        --color-blue-alt: hsl(210, 100%, 30%);
+        --color-highlight-green: hsl(103 100 88%);
+        --color-highlight: hsl(56, 100%, 84%);
+        --color-highlight-purple: hsl(286, 79%, 93%);
+        --font-size-base: clamp(1.4rem, min(4vw, 5vh), 3rem);
+        --size-half: 0.5rem;
+        --size-base: 1rem;
+        --size-2x: 2rem;
+        --size-3x: 2.5rem;
+        --size-4x: 5rem;
+        --size-base-relative: 0.8ch;
+        --size-half-relative: 0.4ch;
+        --easing: cubic-bezier(0.8, -0.4, 0.5, 1);
+
+        --sh-class:      #8d85ff;
+        --sh-identifier: #354150;
+        --sh-sign:       #8996a3;
+        --sh-string:     #00a99a;
+        --sh-keyword:    #f47067;
+        --sh-comment:    #a19595;
+        --sh-property:   #4e8fdf;
+      }
+
+      body {
+        align-items: center;
+        background: var(--color-bg);
+        color: var(--color-primary);
+        display: flex;
+        font: var(--font-size-base) "Outfit", Helvetica, sans-serif;
+        justify-content: center;
+        line-height: 1.5;
+        min-height: 100dvh;
+        text-wrap: pretty;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-smooth: antialiased;
+      }
+
+      header {
+        display: flex;
+        flex-direction: column;
+        gap: var(--size-base);
+        line-height: 1;
+      }
+
+      img,
+      svg {
+        color: inherit;
+        display: block;
+        max-width: 100%;
+      }
+
+      code {
+        font-size: 75%;
+        /* color: var(--color-red-alt);
+        word-break: break-word;
+        letter-spacing: -0.02em; */
+      }
+
+      pre {
+        line-height: 1.3;
+        text-align: left;
+      }
+
+      h1,
+      h2,
+      h3 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        position: relative;
+        text-wrap: balance;
+      }
+
+      h1 {
+        font-size: 300%;
+        line-height: 1;
+        display: block;
+      }
+
+      h2 {
+        font-size: 150%;
+        line-height: 1.15;
+      }
+
+      h3 {
+        font-size: 90%;
+        font-weight: 500;
+      }
+
+      small {
+        font-size: 70%;
+      }
+
+      a {
+        word-break: break-all;
+        color: var(--color-blue);
+        text-decoration-line: underline;
+        text-decoration-color: inherit;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 0.1em;
+        word-break: break-word;
+      }
+
+      a:hover,
+      a:focus {
+        color: var(--color-blue-alt);
+      }
+
+      ul,
+      ol {
+        display: flex;
+        flex-direction: column;
+        gap: var(--size-base);
+        text-align: left;
+        line-height: 1.5;
+      }
+
+      .no-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font: inherit;
+        color: inherit;
+        padding: var(--size-half);
+      }
+
+      main,
+      main > * {
+        display: flex;
+        flex-direction: column;
+        height: 100dvh;
+        width: 100vw;
+      }
+
+      main {
+        overflow: auto;
+        scroll-snap-type: y mandatory;
+      }
+
+      main::-webkit-scrollbar {
+        display: none;
+      }
+
+      section {
+        align-items: center;
+        flex: 0 0 100dvh;
+        gap: 2vw;
+        justify-content: center;
+        overflow: hidden;
+        padding: 2vw;
+        position: relative;
+        scroll-snap-align: center;
+        text-align: center;
+      }
+
+      section > * {
+        max-width: 90rem;
+        opacity: 0.1;
+        filter: blur(4px);
+        transform: translate3d(0, 0.5rem, 0);
+        transition: opacity 0.15s var(--easing), transform 0.15s var(--easing),
+          filter 0.1s linear;
+      }
+
+      section.visible > * {
+        opacity: 1;
+        filter: blur(0px);
+        transform: translate3d(0, 0, 0);
+      }
+
+      section.primary {
+        background-color: var(--color-red);
+        color: var(--color-bg);
+      }
+
+      .anchor {
+        background-color: var(--color-lightest);
+        border-radius: 0.3em 0.15em;
+        corner-shape: bevel;
+        font-size: 80%;
+        font-weight: 500;
+        line-height: 1;
+        top: var(--size-base);
+        padding: var(--size-half-relative);
+        position-area: bottom;
+        position: absolute;
+        opacity: 0;
+        transition: opacity 0.3s 0.8s var(--easing);
+        animation: float 4s ease-in-out infinite;
+        transform-origin: center;
+      }
+
+      section.visible .anchor {
+        opacity: 1;
+      }
+
+      .word-cloud {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: clamp(var(--size-half), 3vw, var(--size-2x));
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+      }
+
+      .word-cloud li {
+        border-radius: 0.3em 0.15em;
+        corner-shape: bevel;
+        font-weight: 500;
+        line-height: 1;
+        padding: var(--size-base-relative);
+        transition: transform 0.1s var(--easing);
+      }
+
+      .word-cloud li:not([class^="highlight-"]) {
+        background-color: var(--color-highlight);
+      }
+
+      .word-cloud li:hover {
+        transform: scale(1.05);
+        z-index: 2;
+      }
+
+      .word-cloud > :nth-child(2n) {
+        transform: rotate(1deg);
+      }
+
+      .word-cloud > :nth-child(3n) {
+        transform: rotate(-1deg);
+      }
+
+      .fullscreen-button {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 2.4rem;
+        width: 2.4rem;
+      }
+
+      .is-fullscreen .fullscreen-open,
+      .fullscreen-exit {
+        display: none;
+      }
+
+      .is-fullscreen .fullscreen-exit {
+        display: block;
+      }
+
+      .reveal-text {
+        display: grid;
+      }
+
+      .reveal-text > * {
+        grid-area: 1 / 1 / 2 / 2;
+        transition: all 0.4s 1.5s var(--easing);
+      }
+
+      .reveal-text > :last-child {
+        opacity: 0;
+        filter: blur(4px);
+        transform: translateY(-1rem) scale(3, 0.5);
+      }
+
+      .visible .reveal-text > :last-child {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0) scale(1);
+      }
+
+      .visible .reveal-text > :first-child {
+        opacity: 0;
+        filter: blur(4px);
+        transform: translateY(1rem) scale(0, 0.5);
+      }
+
+      /** Utility classes */
+      .inline {
+        align-items: center;
+        display: flex;
+        gap: var(--size-half);
+      }
+
+      .columns-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr));
+        gap: var(--size-base);
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .text-center img {
+        margin: 0 auto;
+      }
+
+      mark {
+        color: inherit;
+        word-break: break-word;
+        line-height: 1;
+        margin: 0 -0.05em;
+        padding: 0.1em 0.15em;
+        border-radius: 0.3em 0.15em;
+        corner-shape: bevel;
+        background: transparent;
+        background-image: linear-gradient(
+          to right,
+          hsla(56, 100%, 84%, 0.1),
+          var(--color-highlight) 4%,
+          hsla(56, 100%, 84%, 0.3)
+        );
+        box-decoration-break: clone;
+        z-index: -1;
+      }
+
+      .color-blue {
+        color: var(--color-blue);
+      }
+
+      .color-red {
+        color: var(--color-red);
+      }
+
+      .color-green {
+        color: var(--color-highlight-green);
+      }
+
+      .highlight-green {
+        background-color: var(--color-highlight-green);
+      }
+
+      .highlight-purple {
+        background-color: var(--color-highlight-purple);
+      }
+
+      mark.highlight-green {
+        background-image: linear-gradient(
+          to right,
+          hsla(103 100 88%, 0.1),
+          var(--color-highlight-green) 4%,
+          hsla(103 100 88%, 0.3)
+        );
+      }
+
+      mark.highlight-purple {
+        background-image: linear-gradient(
+          to right,
+          hsla(286, 100%, 93%, 0.1),
+          var(--color-highlight-purple) 4%,
+          hsla(286, 100%, 923%, 0.3)
+        );
+      }
+
+      .br {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: clamp(10rem, 20vw, 15rem);
+        transform: translateY(100%);
+        transition: transform 0.2s 1s var(--easing);
+      }
+
+      .br.visible {
+        transform: translateY(0);
+      }
+
+      .cols-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+        gap: 1rem;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: scale(1) translateY(0);
+        }
+        50% {
+          transform: scale(0.97, 1.03) translateY(0.25rem);
+        }
+      }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main>
+      <section class="primary">
+        <header>
+          <h1>CSS <s>SUCKS</s><br />SUC-CSS!</h1>
+          <div class="color-green">10 CSS you might not know</div>
+        </header>
+      </section>
+
+      <!-- <section>
+        <h2>
+          site.com<mark style="anchor-name: --anchor-path">/blog</mark
+          ><mark class="highlight-green" style="anchor-name: --anchor-params"
+            >?page=3</mark
+          ><mark class="highlight-purple" style="anchor-name: --anchor-fragment"
+            >#section2</mark
+          >
+        </h2>
+
+        <div style="position-anchor: --anchor-path" class="anchor">path</div>
+        <div
+          style="position-anchor: --anchor-params; transition-delay: 1.3s"
+          class="anchor"
+        >
+          parameters<br /><small>(app state)</small>
+        </div>
+        <div
+          style="position-anchor: --anchor-fragment; transition-delay: 1.8s"
+          class="anchor"
+        >
+          fragment<br /><small>(client-side interaction)</small>
+        </div>
+      </section> -->
+
+      <section>
+        <h2><span>1.</span> corner-shape</h2>
+
+        <div class="cols-2">
+          <div class="demo">
+            ...
+          </div>
+
+          <pre class="code"><code>
+          </code></pre>
+        </div>
+      </section>
+
+      <section>
+        <h2><span>2.</span> New size units</h2>
+
+        <div class="cols-2">
+          <div class="demo">
+            ...
+          </div>
+
+          <pre class="code"><code>
+          </code></pre>
+        </div>
+      </section>
+
+      <section>
+        <h2><span>3.</span> OKLCH colour space</h2>
+
+        <div class="cols-2">
+          <div class="demo">
+            ...
+          </div>
+
+          <pre class="code"><code>
+          </code></pre>
+        </div>
+      </section>
+
+      <section>
+        <h2><span>4.</span> light-dark()</h2>
+
+        <div class="cols-2">
+          <div class="demo">
+            ...
+          </div>
+
+          <pre class="code"><code>:root { color-scheme: light dark; }
+  .card {
+    background: light-dark(white, #1a1a1a);
+    color:      light-dark(black, white);
+  }</code></pre>
+        </div>
+      </section>
+
+      <section>
+        <h2><span>5.</span> :has()</h2>
+
+        <div class="cols-2">
+          <div class="demo">
+            ...
+          </div>
+
+          <pre class="code"><code>
+          </code></pre>
+        </div>
+      </section>
+
+      <section>
+        <h2><span>6.</span> field-sizing: content</h2>
+        
+        <div class="cols-2">
+          <div class="demo">
+            ...
+          </div>
+
+          <pre class="code"><code>
+          </code></pre>
+        </div>
+      </section>
+
+      <section>
+        <h2><span>7.</span> Mask (gradient fade)</h2>
+
+        <div class="cols-2">
+          <div class="demo">
+            ...
+          </div>
+
+          <pre class="code"><code>
+          </code></pre>
+        </div>
+      </section>
+
+      <section>
+        <h2><span>8.</span> Container queries</h2>
+
+        <div class="cols-2">
+          <div class="demo">
+            ...
+          </div>
+
+          <pre class="code"><code>
+          </code></pre>
+        </div>
+      </section>
+
+      <section>
+        <h2><span>9.</span> @layer + nesting</h2>
+
+        <div class="cols-2">
+          <div class="demo">
+            ...
+          </div>
+
+          <pre class="code"><code>
+          </code></pre>
+        </div>
+      </section>
+
+      <section>
+        <h2><span>10.</span> Scroll-driven animations + anchor positioning</h2>
+
+        <div class="cols-2">
+          <div class="demo">
+            ...
+          </div>
+
+          <pre class="code"><code>
+          </code></pre>
+        </div>
+      </section>
+
+      <section class="primary">
+        <h1>Great suc-CSS</h1>
+        <img src="great-success.gif" width="400" style="border-radius: 1rem;" />
+      </section>
+
+      <button class="fullscreen-button" onclick="toggleFullScreen()">
+        <svg
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
+        >
+          <path
+            class="fullscreen-open"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"
+          />
+          <path
+            class="fullscreen-exit"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25"
+          />
+        </svg>
+      </button>
+    </main>
+ <script type="module">
+    import { highlight } from 'https://esm.sh/sugar-high';
+    import { css }       from 'https://esm.sh/sugar-high/presets';
+
+        const source = `
+    body {
+      color: red;
+      background: #fff;
+    }
+    .container {
+      display: flex;
+    }
+        `.trim();
+
+        document.getElementById('output').innerHTML = highlight(source, { ...css });
+      </script>
+    <script>
+      const body = document.documentElement;
+      const carousel = document.querySelector("main");
+      const sections = document.querySelectorAll("section");
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            } else {
+              entry.target.classList.remove("visible");
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      sections.forEach((section) => observer.observe(section));
+
+      function scrollToSection(index) {
+        if (index >= 0 && index < sections.length) {
+          const sectionHeight = sections[0].offsetHeight;
+          carousel.scrollTo({
+            top: index * sectionHeight,
+            behavior: "instant",
+          });
+          updateURL(index);
+        }
+      }
+
+      function updateURL(index) {
+        const url = new URL(window.location);
+        url.searchParams.set("slide", index + 1);
+        window.history.replaceState({}, "", url);
+      }
+
+      function getCurrentSectionIndex() {
+        return Math.round(carousel.scrollTop / sections[0].offsetHeight);
+      }
+
+      function initFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        const slideParam = params.get("slide") - 1;
+        if (slideParam !== null) {
+          const slideIndex = parseInt(slideParam, 10);
+
+          if (
+            !isNaN(slideIndex) &&
+            slideIndex >= 0 &&
+            slideIndex < sections.length
+          ) {
+            carousel.scrollTo({
+              top: slideIndex * sections[0].offsetHeight,
+              behavior: "instant",
+            });
+          }
+        }
+      }
+
+      function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+          (body.requestFullscreen || body.webkitRequestFullscreen)?.call(body);
+          body.classList.add("is-fullscreen");
+        } else {
+          (document.exitFullscreen || document.webkitExitFullscreen)?.call(
+            document
+          );
+          body.classList.remove("is-fullscreen");
+        }
+      }
+
+      carousel.addEventListener("scrollend", () => {
+        const currentIndex = getCurrentSectionIndex();
+        updateURL(currentIndex);
+      });
+
+      document.addEventListener("keydown", (e) => {
+        const currentIndex = getCurrentSectionIndex();
+
+        if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+          e.preventDefault();
+          scrollToSection(currentIndex - 1);
+        } else if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+          e.preventDefault();
+          scrollToSection(currentIndex + 1);
+        } else if (e.key === " ") {
+          e.preventDefault();
+          // If on last section, go to first; otherwise go to next
+          const nextIndex =
+            currentIndex === sections.length - 1 ? 0 : currentIndex + 1;
+          scrollToSection(nextIndex);
+        } else if (e.key === "Enter") {
+          e.preventDefault();
+          toggleFullScreen();
+        }
+      });
+
+      initFromURL();
+
+      // if ("serviceWorker" in navigator) {
+      //   navigator.serviceWorker.register("/service-worker.js");
+      // }
+    </script>
+  </body>
+</html>

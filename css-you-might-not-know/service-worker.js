@@ -1,12 +1,8 @@
-const CACHE_NAME = 'make-state-great-again-001';
+const CACHE_NAME = 'css-you-might-not-know-001';
 const urlsToCache = [
   '/',
   '/index.html',
   '/icon.png',
-  '/project-setup-titles.png',
-  '/unmod-results-titles.png',
-  '/thug.jpg',
-  '/tumbleweed.gif',
 ];
 
 self.addEventListener('install', (event) => {
