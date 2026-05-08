@@ -409,6 +409,50 @@
           transform: scale(0.97, 1.03) translateY(0.25rem);
         }
       }
+
+      .succss {
+        position: relative;
+        margin-top: 0.2lh;
+        margin-left: 0.25lh;
+        transform: rotate(2deg);
+      }
+
+      .crown {
+        position: absolute;
+        top: -0.6lh;
+        left: -1rem;
+        height: auto;
+        transform: rotate(-10deg);
+      }
+
+
+      code.code-block {
+        display: block;
+        background: #161618;
+        border-radius: 1rem;
+        padding: 1.25rem 1.5rem;
+        font-family: monospace;
+        font-size: 80%;
+        line-height: 1.75;
+        white-space: pre;
+        overflow-x: auto;
+        tab-size: 2;
+      }
+
+      .css-at { color: #c792ea; }
+      .css-selector { color: #82aaff; }
+      .css-brace { color: #89ddff; }
+      .css-prop { color: #80cbc4; }
+      .css-colon { color: #676e95; }
+      .css-value { color: #f78c6c; }
+      .css-string { color: #c3e88d; }
+      .css-number { color: #f78c6c; }
+      .css-unit { color: #ffcb6b; }
+      .css-function { color: #82aaff; }
+      .css-comment { color: #464b5d; font-style: italic; }
+      .css-paren { color: #89ddff; }
+      .css-comma { color: #676e95; }
+      .css-important{ color: #f07178; font-weight: bold; }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -421,35 +465,12 @@
     <main>
       <section class="primary">
         <header>
-          <h1>CSS <s>SUCKS</s><br />SUC-CSS!</h1>
+          <h1>CSS <s>SUCKS</s>
+          <div class="succss"><svg class="crown" width="160" fill="none" viewBox="0 0 800 777"><path fill="#ca842a" d="m326.2 318.8-212.3-36.3 159.7 114.3zm144.1 0 212.3-36.3L523 396.8z"/><path fill="#edb20f" d="M682.5 282.5s-149.5 88-159.8 77.7C511.3 348.8 411.4 166 397.1 166c-14.4 0-112 182.9-123.5 194.3-10.3 10.3-159.7-77.7-159.7-77.7-20 11 105.5 322.9 105.5 322.9 0 25 20.3 45.2 45.2 45.2h267.1c25 0 45.2-20.2 45.2-45.2 0 0 125.6-311.9 105.6-322.9"/><path fill="#ffc50b" d="M397 165.9c-14.2 0-112 182.9-123.4 194.3-10.3 10.3-159.7-77.7-159.7-77.7-20 11 105.5 322.9 105.5 322.9 0 25 20.3 45.2 45.2 45.2h132.5z"/><path fill="#ffc50b" d="M396 209.3a43.4 43.4 0 1 0 0-86.8 43.4 43.4 0 0 0 0 86.8"/><path fill="#b8972f" d="M577.5 605.4c0 25-20.2 45.2-45.2 45.2H264.6c-25 0-45.2-20.2-45.2-45.2 0 0 104.2-6.2 178.8-6.2s179.3 6.2 179.3 6.2"/><path fill="#c4a12e" d="M397 650.6H264.7c-25 0-45.2-20.2-45.2-45.2 0 0 104.2-6.2 178.8-6.2z"/><path fill="#f6e568" d="M360.8 174.5c-7.6-7.7.8-28.8 8.4-36.4s26-14.8 33.7-7.2c7.6 7.6-34.4 51.2-42 43.6" opacity=".4"/><path fill="#ffc50b" d="M683.2 313.3a28.5 28.5 0 1 0 0-57 28.5 28.5 0 0 0 0 57"/><path fill="#ffc50b" d="M660.1 290.4c-5-5 .5-18.9 5.5-23.9s17.1-9.8 22.2-4.7c5 5-22.7 33.6-27.7 28.6m-546.7 22.9a28.5 28.5 0 1 0 0-57 28.5 28.5 0 0 0 0 57"/><path fill="#f6e568" d="M90.2 290.4c-5-5 .5-18.9 5.5-23.9s17.2-9.8 22.2-4.7c5 5-22.6 33.6-27.7 28.6" opacity=".4"/><path fill="#a8213b" d="m396.5 355-49.7 88 49.7 88.2 49.8-88.2z"/><path fill="#951d38" d="m346.8 443.1 49.7 88.2 49.8-88.2z"/><path fill="#c0355a" d="m396.5 355-49.7 88 49.7 88.2z"/><path fill="#b72d4c" d="M396.5 443.1h-49.7l49.7 88.2z"/></svg>
+            SUC-CSS!</div></h1>
           <div class="color-green">10 CSS you might not know</div>
         </header>
       </section>
-
-      <!-- <section>
-        <h2>
-          site.com<mark style="anchor-name: --anchor-path">/blog</mark
-          ><mark class="highlight-green" style="anchor-name: --anchor-params"
-            >?page=3</mark
-          ><mark class="highlight-purple" style="anchor-name: --anchor-fragment"
-            >#section2</mark
-          >
-        </h2>
-
-        <div style="position-anchor: --anchor-path" class="anchor">path</div>
-        <div
-          style="position-anchor: --anchor-params; transition-delay: 1.3s"
-          class="anchor"
-        >
-          parameters<br /><small>(app state)</small>
-        </div>
-        <div
-          style="position-anchor: --anchor-fragment; transition-delay: 1.8s"
-          class="anchor"
-        >
-          fragment<br /><small>(client-side interaction)</small>
-        </div>
-      </section> -->
 
       <section>
         <h2><span>1.</span> corner-shape</h2>
@@ -459,7 +480,7 @@
             ...
           </div>
 
-          <pre class="code"><code>
+          <pre><code class="code-block">
           </code></pre>
         </div>
       </section>
@@ -472,8 +493,11 @@
             ...
           </div>
 
-          <pre class="code"><code>
-          </code></pre>
+          <pre><code class="code-block">@media(prefers-color-scheme: dark) {
+  :root {
+    -surface: oklch(15% 0.01 260);
+    -on-surface: oklch(92% 0.005 260);
+  }</code></pre>
         </div>
       </section>
 
@@ -485,7 +509,7 @@
             ...
           </div>
 
-          <pre class="code"><code>
+          <pre><code class="code-block">
           </code></pre>
         </div>
       </section>
@@ -498,7 +522,7 @@
             ...
           </div>
 
-          <pre class="code"><code>:root { color-scheme: light dark; }
+          <pre><code class="code-block">:root { color-scheme: light dark; }
   .card {
     background: light-dark(white, #1a1a1a);
     color:      light-dark(black, white);
@@ -514,7 +538,7 @@
             ...
           </div>
 
-          <pre class="code"><code>
+          <pre><code class="code-block">
           </code></pre>
         </div>
       </section>
@@ -527,7 +551,7 @@
             ...
           </div>
 
-          <pre class="code"><code>
+          <pre><code class="code-block">
           </code></pre>
         </div>
       </section>
@@ -540,7 +564,7 @@
             ...
           </div>
 
-          <pre class="code"><code>
+          <pre><code class="code-block">
           </code></pre>
         </div>
       </section>
@@ -553,7 +577,7 @@
             ...
           </div>
 
-          <pre class="code"><code>
+          <pre><code class="code-block">
           </code></pre>
         </div>
       </section>
@@ -566,7 +590,7 @@
             ...
           </div>
 
-          <pre class="code"><code>
+          <pre><code class="code-block">
           </code></pre>
         </div>
       </section>
@@ -579,7 +603,7 @@
             ...
           </div>
 
-          <pre class="code"><code>
+          <pre><code class="code-block">
           </code></pre>
         </div>
       </section>
@@ -611,22 +635,6 @@
         </svg>
       </button>
     </main>
- <script type="module">
-    import { highlight } from 'https://esm.sh/sugar-high';
-    import { css }       from 'https://esm.sh/sugar-high/presets';
-
-        const source = `
-    body {
-      color: red;
-      background: #fff;
-    }
-    .container {
-      display: flex;
-    }
-        `.trim();
-
-        document.getElementById('output').innerHTML = highlight(source, { ...css });
-      </script>
     <script>
       const body = document.documentElement;
       const carousel = document.querySelector("main");
@@ -730,6 +738,224 @@
       // if ("serviceWorker" in navigator) {
       //   navigator.serviceWorker.register("/service-worker.js");
       // }
+    </script>
+    <script>
+      function highlightCSS(code) {
+        const TOKEN_RE = new RegExp([
+        // 1. block comment
+        /\/\*[\s\S]*?\*\//.source,
+        // 2. string literal
+        /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'/.source,
+        // 3. @rule keyword
+        /@[\w-]+/.source,
+        // 4. !important
+        /!important/.source,
+        // 5. CSS function call name(
+        /[\w-]+(?=\s*\()/.source,
+        // 6. opening paren
+        /\(/.source,
+        // 7. closing paren
+        /\)/.source,
+        // 8. number + optional unit
+        /-?(?:\d*\.)?\d+(?:px|rem|em|ex|ch|vw|vh|vmin|vmax|svh|dvh|cqi|cqb|fr|deg|rad|grad|turn|ms|s|%)?/.source,
+        // 9. custom property --foo
+        /--[\w-]+/.source,
+        // 10. braces
+        /[{}]/.source,
+        // 11. colon / semicolon / comma
+        /[:;,]/.source,
+        // 12. word token (property name, value keyword, selector fragment)
+        /[\w-]+/.source,
+        // 13. runs of whitespace (incl. newlines — `.` does not match \n in JS)
+        /\s+/.source,
+        // 14. any other single character
+        /./.source,
+        ].join('|'), 'g');
+
+        const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+        const span = (cls, s) => `<span class="css-${cls}">${esc(s)}</span>`;
+
+        const S = { TOP: 0, SELECTOR: 1, BLOCK: 2, VALUE: 3, AT_PARAMS: 4 };
+
+        let out = '';
+        let state = S.TOP;
+        let depth = 0;
+        let propSeen = false; 
+        let selectorBuf = '';
+
+        function flushSelector() {
+          if (!selectorBuf) return;
+          out += selectorBuf
+          .split(/(,)/)
+          .map(seg => seg === ',' ? span('comma', ',') : span('selector', seg))
+          .join('');
+          selectorBuf = '';
+        }
+
+        const matches = [...code.matchAll(TOKEN_RE)];
+
+        for (let i = 0; i < matches.length; i++) {
+        const raw = matches[i][0];
+
+        if (raw.startsWith('/*')) {
+        if (state === S.SELECTOR || state === S.TOP) flushSelector();
+        out += span('comment', raw);
+        continue;
+        }
+
+        if (raw[0] === '"' || raw[0] === "'") {
+        out += span('string', raw);
+        continue;
+        }
+
+        if (raw[0] === '@') {
+        flushSelector();
+        out += span('at', raw);
+        state = S.AT_PARAMS;
+        continue;
+        }
+
+        if (raw === '!important') {
+        out += span('important', raw);
+        continue;
+        }
+
+        if (raw === '{') {
+        flushSelector();
+        depth++;
+        if (state === S.AT_PARAMS) {
+
+        state = S.BLOCK;
+        propSeen = false;
+        } else {
+        state = S.BLOCK;
+        propSeen = false;
+        }
+        out += span('brace', raw);
+        continue;
+        }
+
+        if (raw === '}') {
+        depth--;
+        state = depth > 0 ? S.BLOCK : S.TOP;
+        propSeen = false;
+        out += span('brace', raw);
+        continue;
+        }
+
+        if (raw === ':') {
+        if (state === S.BLOCK && propSeen) {
+        // entering value territory
+        state = S.VALUE;
+        propSeen = false;
+        out += span('colon', raw);
+        continue;
+        }
+
+        if (state === S.SELECTOR || state === S.TOP) {
+        selectorBuf += raw;
+        continue;
+        }
+        out += span('colon', raw);
+        continue;
+        }
+
+        if (raw === ';') {
+        state = S.BLOCK;
+        propSeen = false;
+        out += span('colon', raw);
+        continue;
+        }
+
+        if (raw === ',') {
+        if (state === S.TOP || state === S.SELECTOR) {
+        selectorBuf += raw;
+        continue;
+        }
+        out += span('comma', raw);
+        continue;
+        }
+
+        if (raw === '(') { out += span('paren', raw); continue; }
+        if (raw === ')') {
+        if (state === S.SELECTOR || state === S.AT_PARAMS) {
+        flushSelector();
+        }
+        out += span('paren', raw);
+        continue;
+        }
+
+        if (/^-?(?:\d*\.)?\d/.test(raw)) {
+        // split number from unit
+        const numMatch = raw.match(/^(-?(?:\d*\.)?\d+)([\w%]*)$/);
+        if (numMatch) {
+        out += span('number', numMatch[1]);
+        if (numMatch[2]) out += span('unit', numMatch[2]);
+        } else {
+        out += span('number', raw);
+        }
+        continue;
+        }
+
+        if (raw.startsWith('--')) {
+        out += span('prop', raw);
+        if (state === S.BLOCK) propSeen = true;
+        continue;
+        }
+
+        // ── CSS function name (word followed by open paren) ───────────────
+        // The regex already captured the word without the paren because of the lookahead.
+        // Peek at next token to confirm it's '('
+        const nextRaw = matches[i + 1]?.[0];
+        if (nextRaw === '(') {
+        out += span('function', raw);
+        continue;
+        }
+
+        if (/^[\w-]+$/.test(raw)) {
+        if (state === S.TOP || state === S.SELECTOR || state === S.AT_PARAMS) {
+        // accumulate into selector buffer
+        selectorBuf += raw;
+        state = S.SELECTOR;
+        continue;
+        }
+        if (state === S.BLOCK) {
+        // first word-token in a block = property name
+        out += span('prop', raw);
+        propSeen = true;
+        continue;
+        }
+        if (state === S.VALUE) {
+        out += span('value', raw);
+        continue;
+        }
+        out += esc(raw);
+        continue;
+        }
+
+        if (/^\s+$/.test(raw)) {
+        if (state === S.SELECTOR || state === S.TOP || state === S.AT_PARAMS) {
+        selectorBuf += raw;
+        } else {
+        out += raw; // preserve whitespace unescaped (no special chars)
+        }
+        continue;
+        }
+
+        if (state === S.SELECTOR || state === S.TOP || state === S.AT_PARAMS) {
+        selectorBuf += raw;
+        } else {
+        out += esc(raw);
+        }
+        }
+
+        flushSelector();
+        return out;
+      }
+
+      document.querySelectorAll('.code-block').forEach(el => {
+        el.innerHTML = highlightCSS(el.textContent);
+      });
     </script>
   </body>
 </html>
