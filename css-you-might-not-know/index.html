@@ -74,10 +74,7 @@
       }
 
       code {
-        font-size: 75%;
-        /* color: var(--color-red-alt);
-        word-break: break-word;
-        letter-spacing: -0.02em; */
+        font-size: 55%;
       }
 
       pre {
@@ -104,6 +101,16 @@
       h2 {
         font-size: 150%;
         line-height: 1.15;
+      }
+
+      h2 span {
+        padding-right: 0.5ch;
+        display: inline-block;
+        color: var(--color-red);
+      }
+
+      h2 img {
+        height: 0.4lh;
       }
 
       h3 {
@@ -151,6 +158,15 @@
         font: inherit;
         color: inherit;
         padding: var(--size-half);
+      }
+
+      input, textarea {
+        font: inherit;
+        color: inherit;
+        padding: var(--size-half);
+        border: 1px solid var(--color-primary-alt);
+        width: 100%;
+        max-width: 30ch;
       }
 
       main,
@@ -202,61 +218,10 @@
         color: var(--color-bg);
       }
 
-      .anchor {
-        background-color: var(--color-lightest);
-        border-radius: 0.3em 0.15em;
-        corner-shape: bevel;
-        font-size: 80%;
-        font-weight: 500;
-        line-height: 1;
-        top: var(--size-base);
-        padding: var(--size-half-relative);
-        position-area: bottom;
-        position: absolute;
-        opacity: 0;
-        transition: opacity 0.3s 0.8s var(--easing);
-        animation: float 4s ease-in-out infinite;
-        transform-origin: center;
-      }
-
-      section.visible .anchor {
-        opacity: 1;
-      }
-
-      .word-cloud {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: clamp(var(--size-half), 3vw, var(--size-2x));
-        justify-content: center;
-        list-style: none;
-        padding: 0;
-      }
-
-      .word-cloud li {
-        border-radius: 0.3em 0.15em;
-        corner-shape: bevel;
-        font-weight: 500;
-        line-height: 1;
-        padding: var(--size-base-relative);
-        transition: transform 0.1s var(--easing);
-      }
-
-      .word-cloud li:not([class^="highlight-"]) {
-        background-color: var(--color-highlight);
-      }
-
-      .word-cloud li:hover {
-        transform: scale(1.05);
-        z-index: 2;
-      }
-
-      .word-cloud > :nth-child(2n) {
-        transform: rotate(1deg);
-      }
-
-      .word-cloud > :nth-child(3n) {
-        transform: rotate(-1deg);
+      @media screen and (max-width: 768px) {
+        section > * {
+          width: 100%;
+        }
       }
 
       .fullscreen-button {
@@ -397,6 +362,7 @@
       .cols-2 {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+        flex-wrap: wrap;
         gap: 1rem;
       }
 
@@ -412,19 +378,73 @@
 
       .succss {
         position: relative;
-        margin-top: 0.2lh;
-        margin-left: 0.25lh;
+        margin-top: 0.6ch;
+        margin-left: 0.25ch;
         transform: rotate(2deg);
       }
 
       .crown {
         position: absolute;
-        top: -0.6lh;
-        left: -1rem;
+        top: -0.9ch;
+        left: 0;
         height: auto;
+        width: 1.5ch;
         transform: rotate(-10deg);
       }
 
+      .card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-lightest);
+        background: var(--color-blue); 
+        overflow: clip;
+        max-width: 30rem; 
+        width: 100%;
+        aspect-ratio: 16/9; 
+        border-radius: 3rem;
+      }
+
+      .card.full-width {
+        max-width: 100%;
+        aspect-ratio: auto;
+        border-radius: 1rem;
+        font-size: 75%;
+        padding: 1rem;
+      }
+
+      .resizeable-container {
+        container-type: inline-size;  
+        contain: layout;     /* enable container queries */
+        resize: horizontal;                /* native drag-to-resize */
+        overflow: auto;
+        width: 30ch;
+        min-width: 10ch;
+        max-width: 100%;
+        padding: 1lh;
+        border: 2px dashed #888;
+
+        .card {
+          background-color: var(--color-red);
+        }
+      }
+
+      @container (width < 20ch) {
+        .resizeable-container { 
+          .card { background-color: var(--color-blue); }
+        }
+      }
+
+      @container (width < 10ch) {
+        .resizeable-container { 
+          .card { border-radius: 0; }
+        }
+      }
+
+      @keyframes grow {
+        from { scale: 0 1; }
+        to   { scale: 1 1; }
+      }
 
       code.code-block {
         display: block;
@@ -432,8 +452,7 @@
         border-radius: 1rem;
         padding: 1.25rem 1.5rem;
         font-family: monospace;
-        font-size: 80%;
-        line-height: 1.75;
+        text-align: start;
         white-space: pre;
         overflow-x: auto;
         tab-size: 2;
@@ -449,7 +468,7 @@
       .css-number { color: #f78c6c; }
       .css-unit { color: #ffcb6b; }
       .css-function { color: #82aaff; }
-      .css-comment { color: #464b5d; font-style: italic; }
+      .css-comment { color: #666; font-style: italic; }
       .css-paren { color: #89ddff; }
       .css-comma { color: #676e95; }
       .css-important{ color: #f07178; font-weight: bold; }
@@ -465,7 +484,7 @@
     <main>
       <section class="primary">
         <header>
-          <h1>CSS <s>SUCKS</s>
+          <h1>CSS <s style="color: var(--color-red-alt);">SUCKS</s>
           <div class="succss"><svg class="crown" width="160" fill="none" viewBox="0 0 800 777"><path fill="#ca842a" d="m326.2 318.8-212.3-36.3 159.7 114.3zm144.1 0 212.3-36.3L523 396.8z"/><path fill="#edb20f" d="M682.5 282.5s-149.5 88-159.8 77.7C511.3 348.8 411.4 166 397.1 166c-14.4 0-112 182.9-123.5 194.3-10.3 10.3-159.7-77.7-159.7-77.7-20 11 105.5 322.9 105.5 322.9 0 25 20.3 45.2 45.2 45.2h267.1c25 0 45.2-20.2 45.2-45.2 0 0 125.6-311.9 105.6-322.9"/><path fill="#ffc50b" d="M397 165.9c-14.2 0-112 182.9-123.4 194.3-10.3 10.3-159.7-77.7-159.7-77.7-20 11 105.5 322.9 105.5 322.9 0 25 20.3 45.2 45.2 45.2h132.5z"/><path fill="#ffc50b" d="M396 209.3a43.4 43.4 0 1 0 0-86.8 43.4 43.4 0 0 0 0 86.8"/><path fill="#b8972f" d="M577.5 605.4c0 25-20.2 45.2-45.2 45.2H264.6c-25 0-45.2-20.2-45.2-45.2 0 0 104.2-6.2 178.8-6.2s179.3 6.2 179.3 6.2"/><path fill="#c4a12e" d="M397 650.6H264.7c-25 0-45.2-20.2-45.2-45.2 0 0 104.2-6.2 178.8-6.2z"/><path fill="#f6e568" d="M360.8 174.5c-7.6-7.7.8-28.8 8.4-36.4s26-14.8 33.7-7.2c7.6 7.6-34.4 51.2-42 43.6" opacity=".4"/><path fill="#ffc50b" d="M683.2 313.3a28.5 28.5 0 1 0 0-57 28.5 28.5 0 0 0 0 57"/><path fill="#ffc50b" d="M660.1 290.4c-5-5 .5-18.9 5.5-23.9s17.1-9.8 22.2-4.7c5 5-22.7 33.6-27.7 28.6m-546.7 22.9a28.5 28.5 0 1 0 0-57 28.5 28.5 0 0 0 0 57"/><path fill="#f6e568" d="M90.2 290.4c-5-5 .5-18.9 5.5-23.9s17.2-9.8 22.2-4.7c5 5-22.6 33.6-27.7 28.6" opacity=".4"/><path fill="#a8213b" d="m396.5 355-49.7 88 49.7 88.2 49.8-88.2z"/><path fill="#951d38" d="m346.8 443.1 49.7 88.2 49.8-88.2z"/><path fill="#c0355a" d="m396.5 355-49.7 88 49.7 88.2z"/><path fill="#b72d4c" d="M396.5 443.1h-49.7l49.7 88.2z"/></svg>
             SUC-CSS!</div></h1>
           <div class="color-green">10 CSS you might not know</div>
@@ -473,139 +492,244 @@
       </section>
 
       <section>
-        <h2><span>1.</span> corner-shape</h2>
+        <h2>MDN Browser Support</h2>
 
-        <div class="cols-2">
-          <div class="demo">
-            ...
-          </div>
-
-          <pre><code class="code-block">
-          </code></pre>
+        <div>
+          <img src="https://developer.mozilla.org/en-US/docs/Glossary/Baseline/Compatibility/high.png" alt="Widely available for at least 2.5 years">
+          <img src="https://developer.mozilla.org/en-US/docs/Glossary/Baseline/Compatibility/limited.png" alt="In the latest stable version">
+          <img src="https://developer.mozilla.org/en-US/docs/Glossary/Baseline/Compatibility/low.png" alt="In some browsers">
         </div>
       </section>
 
       <section>
-        <h2><span>2.</span> New size units</h2>
+        <h2><span>Quiz:</span> What is this?</h2>
 
-        <div class="cols-2">
-          <div class="demo">
-            ...
-          </div>
+        <code class="code-block">.b1f, .b2f, .b3f, .b4f {font-size:1px; overflow:hidden; display:block;}
+.b1f {height:1px; background:blue; margin:0 5px;}
+.b2f {height:1px; background:blue; margin:0 3px;}
+.b3f {height:1px; background:blue; margin:0 2px;}
+.b4f {height:2px; background:blue; margin:0 1px;}
+.contentf {background: #ddd;}</code>
 
-          <pre><code class="code-block">@media(prefers-color-scheme: dark) {
-  :root {
-    -surface: oklch(15% 0.01 260);
-    -on-surface: oklch(92% 0.005 260);
-  }</code></pre>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+      </section>
+
+      <section>
+        <h2><span>Quiz:</span> Nifty corners hack!</h2>
+
+        <code class="code-block">.b1f, .b2f, .b3f, .b4f {font-size:1px; overflow:hidden; display:block;}
+.b1f {height:1px; background:blue; margin:0 5px;}
+.b2f {height:1px; background:blue; margin:0 3px;}
+.b3f {height:1px; background:blue; margin:0 2px;}
+.b4f {height:2px; background:blue; margin:0 1px;}
+.contentf {background: #ddd;}</code>
+        <style>
+          .b1f, .b2f, .b3f, .b4f {font-size:1px; overflow:hidden; display:block;}
+          .b1f {height:1px; background:blue; margin:0 5px;}
+          .b2f {height:1px; background:blue; margin:0 3px;}
+          .b3f {height:1px; background:blue; margin:0 2px;}
+          .b4f {height:2px; background:blue; margin:0 1px;}
+          .contentf {background: blue; color: white;}
+        </style>
+  
+        <p>Make rounded corners before CSS3 border-radius</p>
+        <div>
+          <b class="b1f"></b><b class="b2f"></b><b class="b3f"></b><b class="b4f"></b>
+              <div class="contentf">
+                  <div>Round FILL!</div>
+              </div>
+          <b class="b4f"></b><b class="b3f"></b><b class="b2f"></b><b class="b1f"></b>
         </div>
       </section>
 
       <section>
-        <h2><span>3.</span> OKLCH colour space</h2>
+        <h2><span>1.</span> corner-shape <img src="baseline-limited-icon.svg" /></h2>
 
+        <code class="code-block">.card {
+  border-radius: 2rem;
+  corner-shape: squircle;
+}</code>
+  
+        <p>More interesting shape options without hacks</p>
         <div class="cols-2">
-          <div class="demo">
-            ...
-          </div>
-
-          <pre><code class="code-block">
-          </code></pre>
+          <div class="card" style="corner-shape: squircle;">squircle</div>
+          <div class="card" style="corner-shape: bevel notch scoop superellipse(-2)">bevel notch scoop superellipse(-2)</div>
         </div>
       </section>
 
       <section>
-        <h2><span>4.</span> light-dark()</h2>
+        <h2><span>2.</span> Better size units <img src="baseline-widely-icon.svg" /></h2>
 
-        <div class="cols-2">
-          <div class="demo">
-            ...
-          </div>
+        <code class="code-block">.card { 
+  padding: 1lh; /* one line of text */
+  max-width: 30ch; /* 30 characters wide */
+  max-height: 20vh; /* 20% of viewport height */
+}
+/* fills viewport, handles mobile URL bar */
+.this-slide { height: 100dvh; } </code>
 
-          <pre><code class="code-block">:root { color-scheme: light dark; }
-  .card {
-    background: light-dark(white, #1a1a1a);
-    color:      light-dark(black, white);
-  }</code></pre>
-        </div>
+        <p>Different <em>intents</em>: balanced with text height, readable line length, responsive scaling</p>
+
+          <div class="card"style="padding: 1lh;max-width: 30ch;max-height: 20vh;aspect-ratio: auto;line-height: 1;">card padding = line height</div>
       </section>
 
       <section>
-        <h2><span>5.</span> :has()</h2>
+        <h2><span>3.</span> OKLCH colour space <img src="baseline-widely-icon.svg" /></h2>
 
-        <div class="cols-2">
-          <div class="demo">
-            ...
-          </div>
+        <code class="code-block">.btn { background: oklch(70% 0.25 150); }
+.btn:hover { background: oklch(60% 0.25 150); } /* perceptually darker */</code>
 
-          <pre><code class="code-block">
-          </code></pre>
+        <p>Equally-spaced lightness steps to your eye, wider colour gamut</p>
+
+        <div style="display: flex;">
+          <div style="background: oklch(30% 0.25 150);width:4ch;height:4ch;font-size: 50%;">30%</div>
+          <div style="background: oklch(40% 0.25 150);width:4ch;height:4ch;font-size: 50%;">40%</div>
+          <div style="background: oklch(50% 0.25 150);width:4ch;height:4ch;font-size: 50%;">50%</div>
+          <div style="background: oklch(60% 0.25 150);width:4ch;height:4ch;font-size: 50%;">60%</div>
+          <div style="background: oklch(70% 0.25 150);width:4ch;height:4ch;font-size: 50%;">70%</div>
+          <div style="background: oklch(80% 0.25 150);width:4ch;height:4ch;font-size: 50%;">80%</div>
+          <div style="background: oklch(90% 0.25 150);width:4ch;height:4ch;font-size: 50%;">90%</div>
         </div>
-      </section>
 
-      <section>
-        <h2><span>6.</span> field-sizing: content</h2>
+        <div class="card full-width" style="background: linear-gradient(to right, violet, lawngreen);">linear-gradient(to right, violet, lawngreen)</div>
+        <div class="card full-width" style="background: linear-gradient(to right in oklch, violet, lawngreen);">linear-gradient(to right in oklch, violet, lawngreen)</div>
+        <div class="card full-width" style="background: linear-gradient(to right in oklch longer hue, violet, lawngreen);">linear-gradient(to right in oklch, longer hue, violet, lawngreen)</div>
+        <div class="card full-width" style="background: linear-gradient(to right in oklab, violet, lawngreen);">linear-gradient(to right in oklab, violet, lawngreen)</div>    
+      
         
-        <div class="cols-2">
-          <div class="demo">
-            ...
-          </div>
+      </section>
 
-          <pre><code class="code-block">
-          </code></pre>
+      <section>
+        <h2><span>4.</span> light-dark() <img src="baseline-newly-icon.svg" /></h2>
+
+        <code class="code-block">:root { color-scheme: light dark; }
+
+.card {
+  background: light-dark(white, black);
+  color: light-dark(black, white);
+}
+
+@media (prefers-color-scheme: dark) {
+  .keep-this-light { color-scheme: light; }
+}
+</code>
+      </section>
+
+      <section>
+        <h2><span>5.</span> :has() <img src="baseline-newly-icon.svg" /></h2>
+
+        <code class="code-block">/* style the card differently when it contains an image */
+.card:has(img) { padding: 0; }
+
+/* form label turns red when its input is invalid */
+label:has(input:invalid) { color: crimson; }</code>
+
+        <p>Style parent node based on a child state</p>
+
+        <div class="cols-2">
+          <div class="card" style=":has(img) { padding: 0; }">Text in this box has padding</div>
+          <div class="card" style=":has(img) { padding: 0; }"><img src="https://placehold.co/533x300" alt="Placeholder"></div>
         </div>
       </section>
 
       <section>
-        <h2><span>7.</span> Mask (gradient fade)</h2>
+        <h2><span>6.</span> field-sizing: content <img src="baseline-limited-icon.svg" /></h2>
 
-        <div class="cols-2">
-          <div class="demo">
-            ...
-          </div>
+        <code class="code-block">textarea {
+  field-sizing: content;
+  min-height: 1lh;
+  max-height: 6lh;
+  resize: none;
+}</code>
 
-          <pre><code class="code-block">
-          </code></pre>
+        <textarea style="field-sizing: content; min-height: 1lh;max-height: 6lh;resize: none;">Textarea that grows with content, no JS needed. Only Firefox unsupported.</textarea>
+      </section>
+
+      <section>
+        <h2><span>7.</span> Mask (gradient fade) <img src="baseline-widely-icon.svg" /></h2>
+
+        <code class="code-block">.scroll-list {
+  overflow-y: auto;
+  mask: linear-gradient(180deg,
+    transparent, black 1lh,
+    black calc(100% - 1lh), transparent);
+}</code>
+
+        <div style="border: 1px solid #ccc;"><div style="overflow-y: auto;mask: linear-gradient(180deg, transparent, black 1lh, black calc(100% - 1lh), transparent);height: 5lh;padding:1lh;"><p>Fade the edges of an overflowed element</p><div style="height: 10lh;"></div><p>Middle of content</p><div style="height: 10lh;"></div><p>End of content</p></div></div>
+      </section>
+
+      <section>
+        <h2><span>8.</span> Container queries <img src="baseline-widely-icon.svg" /></h2>
+
+        <code class="code-block">.container { container-type: inline-size; }
+.card { background: red; }
+
+@container (width < 20ch) {
+  .card { background: blue; }
+}</code>
+
+        <p>Layout that adapts to container width, not viewport</p>
+
+        <div class="resizeable-container">
+          <div class="card">Content</div>
         </div>
       </section>
 
       <section>
-        <h2><span>8.</span> Container queries</h2>
+        <h2><span>9.</span> @layer + nesting <img src="baseline-widely-icon.svg" /></h2>
 
-        <div class="cols-2">
-          <div class="demo">
-            ...
-          </div>
+        <code class="code-block">@layer reset, base, components;
+@layer components {
+  .card {
+    padding: 1rem;
+    background: light-dark(white, #1a1a1a);
 
-          <pre><code class="code-block">
-          </code></pre>
+    & h2 { font-size: 1.5rem; }
+    &:hover { transform: translateY(-2px); }
+  }
+}</code>
+
+        <p>Scoped styles (breaks Cascade)</p>
+        <p>Co-locate without SCSS</p>
         </div>
       </section>
 
       <section>
-        <h2><span>9.</span> @layer + nesting</h2>
+        <h2><span>10(a).</span> Scroll-driven animations <img src="baseline-limited-icon.svg" /></h2>
 
-        <div class="cols-2">
-          <div class="demo">
-            ...
-          </div>
+        <code class="code-block">@keyframes grow { from { scale: 0 1; } to { scale: 1 1; } }
+.progress {
+  animation: grow linear; 
+  animation-timeline: scroll();
+  background: rebeccapurple; 
+  height: 1rem;
+  position: sticky; 
+  top: 0;
+  transform-origin: left;
+}</code>
 
-          <pre><code class="code-block">
-          </code></pre>
+        <div style="width: 100%;height: 200px;overflow-y: scroll;border: 1px solid #ccc;">
+          <div class="progress" style="position: sticky;top: 0;height: 1rem;background: rebeccapurple;transform-origin: left;animation: grow linear;animation-timeline: scroll();"></div>
+          <div style="height: 15lh; padding: 0.5lh;">Animate things based on viewport scroll position.<br /><br /><br />Only Firefox unsupported.<br /><br />Of course...</div>
         </div>
       </section>
 
       <section>
-        <h2><span>10.</span> Scroll-driven animations + anchor positioning</h2>
+        <h2><span>10(b).</span> Anchor position <img src="baseline-limited-icon.svg" /></h2>
 
-        <div class="cols-2">
-          <div class="demo">
-            ...
-          </div>
+          <code class="code-block">.btn { anchor-name: --btn; }
+.tooltip {
+  position: absolute; 
+  position-anchor: --btn;
+  position-area: bottom;
+  position-try-fallbacks: flip-block;
+}</code>
 
-          <pre><code class="code-block">
-          </code></pre>
-        </div>
+          <p>Stick stuff to other stuff</p>
+          <div class="tooltip" style="position: absolute; position-anchor: --btn; position-area: bottom; position-try-fallbacks: flip-block; background: var(--color-highlight-green); font-size: 70%;">Tooltip</div>
+          <div class="btn" style="anchor-name: --btn;" onclick="this.style.transform='translate(100px, 160px)'">Button</div>
+
       </section>
 
       <section class="primary">
@@ -713,6 +837,9 @@
       });
 
       document.addEventListener("keydown", (e) => {
+        if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") {
+          return;
+        }
         const currentIndex = getCurrentSectionIndex();
 
         if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
@@ -740,222 +867,231 @@
       // }
     </script>
     <script>
-      function highlightCSS(code) {
+      /*!
+      * css-highlight.js — minimal CSS syntax highlighter
+      *
+      * Auto-applies to elements matching `.code-block` on DOMContentLoaded.
+      *
+      * Public API (window.CSSHighlight):
+      *   highlight(cssString)            -> string of HTML
+      *   highlightElement(el)            -> sets el.innerHTML in-place (idempotent)
+      *   highlightAll(selector?)         -> applies to all matching elements
+      *
+      * Emitted classes (style as you wish):
+      *   css-at css-selector css-brace css-prop css-colon css-value
+      *   css-string css-number css-unit css-function css-comment
+      *   css-paren css-comma css-important
+      */
+      (function (root, factory) {
+        if (typeof module === 'object' && module.exports) module.exports = factory();
+        else if (typeof define === 'function' && define.amd) define(factory);
+        else root.CSSHighlight = factory();
+      }(typeof self !== 'undefined' ? self : this, function () {
+        'use strict';
+
+        // Tokenizer. Order matters: more specific patterns first.
         const TOKEN_RE = new RegExp([
-        // 1. block comment
-        /\/\*[\s\S]*?\*\//.source,
-        // 2. string literal
-        /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'/.source,
-        // 3. @rule keyword
-        /@[\w-]+/.source,
-        // 4. !important
-        /!important/.source,
-        // 5. CSS function call name(
-        /[\w-]+(?=\s*\()/.source,
-        // 6. opening paren
-        /\(/.source,
-        // 7. closing paren
-        /\)/.source,
-        // 8. number + optional unit
-        /-?(?:\d*\.)?\d+(?:px|rem|em|ex|ch|vw|vh|vmin|vmax|svh|dvh|cqi|cqb|fr|deg|rad|grad|turn|ms|s|%)?/.source,
-        // 9. custom property --foo
-        /--[\w-]+/.source,
-        // 10. braces
-        /[{}]/.source,
-        // 11. colon / semicolon / comma
-        /[:;,]/.source,
-        // 12. word token (property name, value keyword, selector fragment)
-        /[\w-]+/.source,
-        // 13. runs of whitespace (incl. newlines — `.` does not match \n in JS)
-        /\s+/.source,
-        // 14. any other single character
-        /./.source,
+          /\/\*[\s\S]*?\*\//.source,                     // block comment
+          /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'/.source,  // string
+          /@[\w-]+/.source,                              // at-rule keyword
+          /!important\b/.source,                         // !important
+          /--[\w-]+/.source,                             // CSS custom property
+          /#[\w-]+/.source,                              // id selector or hex color
+          /[\w-]+(?=\s*\()/.source,                      // function name
+          /-?(?:\d*\.)?\d+[a-zA-Z%]*/.source,            // number with optional unit
+          /[{}();:,]/.source,                            // single-char punctuation
+          /[\w-]+/.source,                               // identifier
+          /\s+/.source,                                  // whitespace
+          /./.source                                     // catch-all (single char)
         ].join('|'), 'g');
 
-        const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-        const span = (cls, s) => `<span class="css-${cls}">${esc(s)}</span>`;
+        const TOP = 0, SELECTOR = 1, AT_PARAMS = 2, BLOCK = 3, VALUE = 4;
 
-        const S = { TOP: 0, SELECTOR: 1, BLOCK: 2, VALUE: 3, AT_PARAMS: 4 };
+        const ESC = { '&': '&amp;', '<': '&lt;', '>': '&gt;' };
+        const escape = s => s.replace(/[&<>]/g, c => ESC[c]);
+        const span = (cls, s) => '<span class="css-' + cls + '">' + escape(s) + '</span>';
 
-        let out = '';
-        let state = S.TOP;
-        let depth = 0;
-        let propSeen = false; 
-        let selectorBuf = '';
+        function highlight(code) {
+          const tokens = String(code).match(TOKEN_RE) || [];
+          let out = '';
+          let state = TOP;
+          let depth = 0;
+          let expectColon = false; // true after a property name, before its colon
 
-        function flushSelector() {
-          if (!selectorBuf) return;
-          out += selectorBuf
-          .split(/(,)/)
-          .map(seg => seg === ',' ? span('comma', ',') : span('selector', seg))
-          .join('');
-          selectorBuf = '';
-        }
+          const inSelectorCtx = () =>
+            state === TOP || state === SELECTOR || state === AT_PARAMS;
+          const enterSelector = () => { if (state === TOP) state = SELECTOR; };
 
-        const matches = [...code.matchAll(TOKEN_RE)];
+          // Lookahead used to disambiguate nested rules from declarations.
+          // From `start`, find the next `{`, `;`, or `}` ignoring tokens inside
+          // parens, strings, and comments. `{` => nested rule; otherwise declaration.
+          function isNestedRule(start) {
+            let parens = 0;
+            for (let j = start; j < tokens.length; j++) {
+              const t = tokens[j];
+              if (t.startsWith('/*')) continue;
+              const c = t[0];
+              if (c === '"' || c === "'") continue;
+              if (t === '(') { parens++; continue; }
+              if (t === ')') { if (parens > 0) parens--; continue; }
+              if (parens > 0) continue;
+              if (t === '{') return true;
+              if (t === ';' || t === '}') return false;
+            }
+            return false;
+          }
 
-        for (let i = 0; i < matches.length; i++) {
-        const raw = matches[i][0];
+          for (let i = 0; i < tokens.length; i++) {
+            const tok = tokens[i];
+            const c0 = tok[0];
 
-        if (raw.startsWith('/*')) {
-        if (state === S.SELECTOR || state === S.TOP) flushSelector();
-        out += span('comment', raw);
-        continue;
-        }
+            // At the start of each "thing" inside a block, peek ahead to decide
+            // whether it's a nested rule or a declaration.
+            if (state === BLOCK && !expectColon
+                && tok !== '{' && tok !== '}' && tok !== ';'
+                && !/^\s+$/.test(tok) && !tok.startsWith('/*')) {
+              if (isNestedRule(i)) state = SELECTOR;
+            }
 
-        if (raw[0] === '"' || raw[0] === "'") {
-        out += span('string', raw);
-        continue;
-        }
+            if (tok.startsWith('/*'))     { out += span('comment', tok); continue; }
+            if (c0 === '"' || c0 === "'") { out += span('string', tok); continue; }
+            if (c0 === '@')               { out += span('at', tok); state = AT_PARAMS; continue; }
+            if (tok === '!important')     { out += span('important', tok); continue; }
 
-        if (raw[0] === '@') {
-        flushSelector();
-        out += span('at', raw);
-        state = S.AT_PARAMS;
-        continue;
-        }
+            if (tok === '{') {
+              depth++;
+              state = BLOCK;
+              expectColon = false;
+              out += span('brace', tok);
+              continue;
+            }
+            if (tok === '}') {
+              if (depth > 0) depth--;
+              state = depth > 0 ? BLOCK : TOP;
+              expectColon = false;
+              out += span('brace', tok);
+              continue;
+            }
 
-        if (raw === '!important') {
-        out += span('important', raw);
-        continue;
-        }
+            if (tok === ':') {
+              if (state === BLOCK && expectColon) {
+                out += span('colon', tok);
+                state = VALUE;
+                expectColon = false;
+              } else if (state === TOP || state === SELECTOR) {
+                // pseudo-class / pseudo-element separator
+                out += span('selector', tok);
+                enterSelector();
+              } else {
+                out += span('colon', tok);
+              }
+              continue;
+            }
 
-        if (raw === '{') {
-        flushSelector();
-        depth++;
-        if (state === S.AT_PARAMS) {
+            if (tok === ';') {
+              out += span('colon', tok);
+              state = depth > 0 ? BLOCK : TOP;
+              expectColon = false;
+              continue;
+            }
 
-        state = S.BLOCK;
-        propSeen = false;
-        } else {
-        state = S.BLOCK;
-        propSeen = false;
-        }
-        out += span('brace', raw);
-        continue;
-        }
+            if (tok === ',')                 { out += span('comma', tok); continue; }
+            if (tok === '(' || tok === ')')  { out += span('paren', tok); continue; }
 
-        if (raw === '}') {
-        depth--;
-        state = depth > 0 ? S.BLOCK : S.TOP;
-        propSeen = false;
-        out += span('brace', raw);
-        continue;
-        }
+            // # is a hex color in values, an id selector elsewhere
+            if (c0 === '#' && tok.length > 1) {
+              if (state === VALUE) {
+                out += span('number', tok);
+              } else if (inSelectorCtx()) {
+                out += span('selector', tok);
+                enterSelector();
+              } else {
+                out += escape(tok);
+              }
+              continue;
+            }
 
-        if (raw === ':') {
-        if (state === S.BLOCK && propSeen) {
-        // entering value territory
-        state = S.VALUE;
-        propSeen = false;
-        out += span('colon', raw);
-        continue;
-        }
+            // numbers (with optional unit)
+            if (/^-?(?:\d*\.)?\d/.test(tok)) {
+              const m = tok.match(/^(-?(?:\d*\.)?\d+)([a-zA-Z%]*)$/);
+              if (m) {
+                out += span('number', m[1]);
+                if (m[2]) out += span('unit', m[2]);
+              } else {
+                out += span('number', tok);
+              }
+              continue;
+            }
 
-        if (state === S.SELECTOR || state === S.TOP) {
-        selectorBuf += raw;
-        continue;
-        }
-        out += span('colon', raw);
-        continue;
-        }
+            // CSS custom property (--name)
+            if (tok.startsWith('--')) {
+              out += span('prop', tok);
+              if (state === BLOCK) expectColon = true;
+              continue;
+            }
 
-        if (raw === ';') {
-        state = S.BLOCK;
-        propSeen = false;
-        out += span('colon', raw);
-        continue;
-        }
+            // function-like identifier (word followed by `(`)
+            if (/^[\w-]+$/.test(tok) && tokens[i + 1] === '(') {
+              if (state === BLOCK) {
+                out += span('prop', tok); expectColon = true;
+              } else if (state === SELECTOR || state === TOP) {
+                // pseudo-class function: :nth-child(...), :is(...), etc.
+                out += span('selector', tok); enterSelector();
+              } else {
+                out += span('function', tok);
+              }
+              continue;
+            }
 
-        if (raw === ',') {
-        if (state === S.TOP || state === S.SELECTOR) {
-        selectorBuf += raw;
-        continue;
-        }
-        out += span('comma', raw);
-        continue;
-        }
+            // plain identifier
+            if (/^[\w-]+$/.test(tok)) {
+              if (state === BLOCK) {
+                out += span('prop', tok); expectColon = true;
+              } else if (state === VALUE) {
+                out += span('value', tok);
+              } else if (inSelectorCtx()) {
+                out += span('selector', tok); enterSelector();
+              } else {
+                out += escape(tok);
+              }
+              continue;
+            }
 
-        if (raw === '(') { out += span('paren', raw); continue; }
-        if (raw === ')') {
-        if (state === S.SELECTOR || state === S.AT_PARAMS) {
-        flushSelector();
-        }
-        out += span('paren', raw);
-        continue;
-        }
+            // whitespace passes through verbatim
+            if (/^\s+$/.test(tok)) { out += tok; continue; }
 
-        if (/^-?(?:\d*\.)?\d/.test(raw)) {
-        // split number from unit
-        const numMatch = raw.match(/^(-?(?:\d*\.)?\d+)([\w%]*)$/);
-        if (numMatch) {
-        out += span('number', numMatch[1]);
-        if (numMatch[2]) out += span('unit', numMatch[2]);
-        } else {
-        out += span('number', raw);
-        }
-        continue;
-        }
+            // anything else (e.g. . * + > ~ [ ] = & |)
+            if (inSelectorCtx()) {
+              out += span('selector', tok); enterSelector();
+            } else {
+              out += escape(tok);
+            }
+          }
 
-        if (raw.startsWith('--')) {
-        out += span('prop', raw);
-        if (state === S.BLOCK) propSeen = true;
-        continue;
-        }
-
-        // ── CSS function name (word followed by open paren) ───────────────
-        // The regex already captured the word without the paren because of the lookahead.
-        // Peek at next token to confirm it's '('
-        const nextRaw = matches[i + 1]?.[0];
-        if (nextRaw === '(') {
-        out += span('function', raw);
-        continue;
-        }
-
-        if (/^[\w-]+$/.test(raw)) {
-        if (state === S.TOP || state === S.SELECTOR || state === S.AT_PARAMS) {
-        // accumulate into selector buffer
-        selectorBuf += raw;
-        state = S.SELECTOR;
-        continue;
-        }
-        if (state === S.BLOCK) {
-        // first word-token in a block = property name
-        out += span('prop', raw);
-        propSeen = true;
-        continue;
-        }
-        if (state === S.VALUE) {
-        out += span('value', raw);
-        continue;
-        }
-        out += esc(raw);
-        continue;
-        }
-
-        if (/^\s+$/.test(raw)) {
-        if (state === S.SELECTOR || state === S.TOP || state === S.AT_PARAMS) {
-        selectorBuf += raw;
-        } else {
-        out += raw; // preserve whitespace unescaped (no special chars)
-        }
-        continue;
+          return out;
         }
 
-        if (state === S.SELECTOR || state === S.TOP || state === S.AT_PARAMS) {
-        selectorBuf += raw;
-        } else {
-        out += esc(raw);
-        }
+        function highlightElement(el) {
+          if (!el || el.dataset.cssHighlighted === 'true') return;
+          el.innerHTML = highlight(el.textContent);
+          el.dataset.cssHighlighted = 'true';
         }
 
-        flushSelector();
-        return out;
-      }
+        function highlightAll(selector) {
+          if (typeof document === 'undefined') return;
+          document.querySelectorAll(selector || '.code-block').forEach(highlightElement);
+        }
 
-      document.querySelectorAll('.code-block').forEach(el => {
-        el.innerHTML = highlightCSS(el.textContent);
-      });
+        if (typeof document !== 'undefined') {
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function () { highlightAll(); });
+          } else {
+            highlightAll();
+          }
+        }
+
+        return { highlight: highlight, highlightElement: highlightElement, highlightAll: highlightAll };
+      }));
     </script>
   </body>
 </html>

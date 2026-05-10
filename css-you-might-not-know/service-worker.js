@@ -1,8 +1,11 @@
-const CACHE_NAME = 'css-you-might-not-know-001';
+const CACHE_NAME = 'css-you-might-not-know-002';
 const urlsToCache = [
   '/',
   '/index.html',
   '/icon.png',
+  '/baseline-limited-icon.svg',
+  '/baseline-newly-icon.svg',
+  '/baseline-widely-icon.svg',
 ];
 
 self.addEventListener('install', (event) => {
