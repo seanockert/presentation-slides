@@ -164,6 +164,7 @@
         font: inherit;
         color: inherit;
         padding: var(--size-half);
+        background: transparent;
         border: 1px solid var(--color-primary-alt);
         width: 100%;
         max-width: 30ch;
@@ -535,7 +536,7 @@
         </style>
   
         <p>Make rounded corners before CSS3 border-radius</p>
-        <div>
+        <div onclick="this.querySelectorAll('.b1f, .b2f, .b3f, .b4f').forEach(el => { el.style.marginTop='0.4rem';el.style.marginBottom='0.4rem'});">
           <b class="b1f"></b><b class="b2f"></b><b class="b3f"></b><b class="b4f"></b>
               <div class="contentf">
                   <div>Round FILL!</div>
@@ -583,7 +584,7 @@
 
         <p>Equally-spaced lightness steps to your eye, wider colour gamut</p>
 
-        <div style="display: flex;">
+        <!-- <div style="display: flex;">
           <div style="background: oklch(30% 0.25 150);width:4ch;height:4ch;font-size: 50%;">30%</div>
           <div style="background: oklch(40% 0.25 150);width:4ch;height:4ch;font-size: 50%;">40%</div>
           <div style="background: oklch(50% 0.25 150);width:4ch;height:4ch;font-size: 50%;">50%</div>
@@ -591,6 +592,20 @@
           <div style="background: oklch(70% 0.25 150);width:4ch;height:4ch;font-size: 50%;">70%</div>
           <div style="background: oklch(80% 0.25 150);width:4ch;height:4ch;font-size: 50%;">80%</div>
           <div style="background: oklch(90% 0.25 150);width:4ch;height:4ch;font-size: 50%;">90%</div>
+        </div> -->
+
+        
+        <div style="display: flex;gap: 1ch">
+          <input type="range" min="0" max="360" value="150" style="width:10ch" oninput="this.nextElementSibling.style.setProperty('--h', this.value)">
+          <div style="display: flex; --h: 150;">
+            <div style="background: oklch(30% 0.25 var(--h));width:4ch;height:4ch;font-size: 50%;">30%</div>
+            <div style="background: oklch(40% 0.25 var(--h));width:4ch;height:4ch;font-size: 50%;">40%</div>
+            <div style="background: oklch(50% 0.25 var(--h));width:4ch;height:4ch;font-size: 50%;">50%</div>
+            <div style="background: oklch(60% 0.25 var(--h));width:4ch;height:4ch;font-size: 50%;">60%</div>
+            <div style="background: oklch(70% 0.25 var(--h));width:4ch;height:4ch;font-size: 50%;">70%</div>
+            <div style="background: oklch(80% 0.25 var(--h));width:4ch;height:4ch;font-size: 50%;">80%</div>
+            <div style="background: oklch(90% 0.25 var(--h));width:4ch;height:4ch;font-size: 50%;">90%</div>
+          </div>
         </div>
 
         <div class="card full-width" style="background: linear-gradient(to right, violet, lawngreen);">linear-gradient(to right, violet, lawngreen)</div>
@@ -743,8 +758,11 @@ label:has(input:invalid) { color: crimson; }</code>
           <li>@starting-style</li>
           <li>sibling-index() tree counting</li>
           <li>if(), random(), mod(), round(), pow(), sqrt() functions</li>
-          
         </ul>
+      </section>
+
+      <section>
+        <img src="./meme.jpg" />
       </section>
 
       <button class="fullscreen-button" onclick="toggleFullScreen()">
